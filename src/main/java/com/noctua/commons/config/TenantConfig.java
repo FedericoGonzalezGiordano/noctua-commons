@@ -1,10 +1,10 @@
 package com.noctua.commons.config;
 
 import com.noctua.commons.tenant.TenantInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,14 +13,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Debe ser importada en cada microservicio que use multi-tenancy.
  */
 @Configuration
+@RequiredArgsConstructor
 public class TenantConfig implements WebMvcConfigurer {
     
     private final TenantInterceptor tenantInterceptor;
     
-    @Autowired
-    public TenantConfig(TenantInterceptor tenantInterceptor) {
-        this.tenantInterceptor = tenantInterceptor;
-    }
+    
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -34,7 +32,9 @@ public class TenantConfig implements WebMvcConfigurer {
     }
     
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    public WebClient webClient() {
+        return WebClient.builder()
+                .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(1024 * 1024))
+                .build();
     }
 }

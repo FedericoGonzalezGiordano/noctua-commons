@@ -2,7 +2,7 @@ package com.noctua.commons.tenant;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -14,14 +14,12 @@ import java.util.UUID;
  * para cada request HTTP. Se ejecuta antes de llegar al controller.
  */
 @Component
+@RequiredArgsConstructor
 public class TenantInterceptor implements HandlerInterceptor {
     
     private final TenantResolver tenantResolver;
     
-    @Autowired
-    public TenantInterceptor(TenantResolver tenantResolver) {
-        this.tenantResolver = tenantResolver;
-    }
+  
     
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
