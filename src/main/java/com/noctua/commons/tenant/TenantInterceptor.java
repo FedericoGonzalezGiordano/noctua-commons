@@ -70,7 +70,7 @@ public class TenantInterceptor implements HandlerInterceptor {
     
     private boolean isLocalDevelopment(HttpServletRequest request) {
         String host = request.getServerName();
-        return "localhost".equals(host) || host.startsWith("127.0.0.1") || host.startsWith("192.168.");
+        return "localhost".equals(host) || host.startsWith("127.0.0.1") || host.startsWith("192");
     }
     
     private UUID getDefaultDevelopmentTenant() {

@@ -21,8 +21,8 @@ import java.util.UUID;
 public class TenantHttpService {
     
     private final WebClient webClient;
-    
-    @Value("${noctua.tenancy.service.url}")
+
+    @Value("${noctua.tenancy.service.url:http://localhost:8080}")
     private String tenancyServiceUrl;
     
     /**

@@ -23,9 +23,9 @@ public class TenantCacheService {
     private final TenantHttpService tenantHttpService;
     private final Map<String, CacheEntry> subdomainCache = new ConcurrentHashMap<>();
     private final Map<UUID, CacheEntry> tenantIdCache = new ConcurrentHashMap<>();
-    
+
     private static final int CACHE_TTL_MINUTES = 5;
-    
+
     /**
      * Obtiene tenant por subdomain con cache local.
      */
@@ -33,7 +33,7 @@ public class TenantCacheService {
         if (subdomain == null || subdomain.isEmpty()) {
             return Optional.empty();
         }
-        
+
         // 1. Verificar cache
         CacheEntry cached = subdomainCache.get(subdomain);
         if (cached != null && !cached.isExpired()) {
@@ -59,8 +59,9 @@ public class TenantCacheService {
                             CacheEntry entry = new CacheEntry(Optional.of(tenant.id()));
                             subdomainCache.put(subdomain, entry);
                             tenantIdCache.put(tenant.id(), entry);
-                            log.debug("Cached tenant {} for subdomain {}", tenant.id(), subdomain);
+                            log.debug("Cached tenant q {} for subdomain {}", tenant.id(), subdomain);
                         } else {
+                            log.debug("Cached tenant t {} for subdomain {}", tenant.id(), subdomain);
                             // Cache negative result
                             subdomainCache.put(subdomain, new CacheEntry(Optional.empty()));
                         }
@@ -107,16 +108,16 @@ public class TenantCacheService {
     private static class CacheEntry {
         private final Optional<UUID> tenantId;
         private final LocalDateTime createdAt;
-        
+
         public CacheEntry(Optional<UUID> tenantId) {
             this.tenantId = tenantId;
             this.createdAt = LocalDateTime.now();
         }
-        
+
         public Optional<UUID> getTenantId() {
             return tenantId;
         }
-        
+
         public boolean isExpired() {
             return createdAt.plusMinutes(CACHE_TTL_MINUTES).isBefore(LocalDateTime.now());
         }
