@@ -1,0 +1,3 @@
+com.noctua.commons.config.NoctuaCommonsAutoConfiguration
+com.noctua.commons.config.CacheConfig
+com.noctua.commons.config.TenantConfig
