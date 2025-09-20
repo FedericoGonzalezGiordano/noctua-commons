@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  
+  <servers>
+    <server>
+      <id>github</id>
+      <username>405516GONZALEZFEDERICO</username>
+      <password>TU_PERSONAL_ACCESS_TOKEN_AQUI</password>
+    </server>
+  </servers>
+
+  <!-- Opcional: Configuración de proxy si es necesario -->
+  <!--
+  <proxies>
+    <proxy>
+      <id>example-proxy</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy.example.com</host>
+      <port>8080</port>
+    </proxy>
+  </proxies>
+  -->
+
+</settings>
