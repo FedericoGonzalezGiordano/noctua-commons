@@ -13,7 +13,7 @@
 
     <groupId>com.noctua</groupId>
     <artifactId>noctua-commons</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
 
     <name>Noctua Commons</name>
@@ -41,6 +41,13 @@
     </properties>
 
     <dependencies>
+        <!-- Noctua Commons DTO - DTOs compartidos -->
+        <dependency>
+            <groupId>com.noctua</groupId>
+            <artifactId>noctua-commons-dto</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
         <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
