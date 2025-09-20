@@ -2,6 +2,7 @@ package com.noctua.commons.enums;
 
 /**
  * Estados posibles de un tenant en el sistema.
+ * Debe coincidir con TenantStatus del tenancy-service.
  */
 public enum TenantStatus {
     /**
@@ -17,23 +18,13 @@ public enum TenantStatus {
     /**
      * Tenant cancelado por el usuario.
      */
-    CANCELLED,
-    
-    /**
-     * Tenant pendiente de activación.
-     */
-    PENDING,
-    
-    /**
-     * Tenant en período de prueba.
-     */
-    TRIAL;
+    CANCELLED;
     
     /**
      * Verifica si el tenant puede operar normalmente.
      */
     public boolean isOperational() {
-        return this == ACTIVE || this == TRIAL;
+        return this == ACTIVE;
     }
     
     /**
