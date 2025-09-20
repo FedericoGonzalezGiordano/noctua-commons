@@ -18,18 +18,18 @@
 
     <name>Noctua Commons</name>
     <description>Biblioteca común para funcionalidades compartidas entre microservicios Noctua</description>
-    <url>https://github.com/405516GONZALEZFEDERICO/noctua</url>
+    <url>https://github.com/FedericoGonzalezGiordano/noctua-commons</url>
 
     <distributionManagement>
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/405516GONZALEZFEDERICO/noctua</url>
+            <url>https://maven.pkg.github.com/FedericoGonzalezGiordano/noctua-commons</url>
         </repository>
         <snapshotRepository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/405516GONZALEZFEDERICO/noctua</url>
+            <url>https://maven.pkg.github.com/FedericoGonzalezGiordano/noctua-commons</url>
         </snapshotRepository>
     </distributionManagement>
 

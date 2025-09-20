@@ -22,7 +22,7 @@ public class TenantHttpService {
     
     private final WebClient webClient;
 
-    @Value("${noctua.tenancy.service.url:http://localhost:8080}")
+    @Value("${noctua.tenancy.service.url}")
     private String tenancyServiceUrl;
     
     /**
