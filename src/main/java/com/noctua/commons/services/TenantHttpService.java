@@ -30,13 +30,13 @@ public class TenantHttpService {
      */
     public Mono<TenantDto> getTenantBySubdomain(String subdomain) {
         return webClient.get()
-                .uri(tenancyServiceUrl + "/api/tenants/by-subdomain/{subdomain}", subdomain)
+                .uri(tenancyServiceUrl + "/api/tenants/commons/by-subdomain/{subdomain}", subdomain)
                 .retrieve()
                 .bodyToMono(TenantDto.class)
                 .timeout(Duration.ofSeconds(5))
                 .doOnError(error -> log.warn("Error fetching tenant by subdomain '{}': {}", 
                     subdomain, error.getMessage()))
-                .onErrorReturn(new TenantDto(null, null, null, null, null)); // Return empty record on error
+                .onErrorReturn(new TenantDto(null, null, null, null, null, null, null, null)); // Return empty record on error
     }
     
     /**
@@ -44,21 +44,26 @@ public class TenantHttpService {
      */
     public Mono<TenantDto> getTenantById(UUID tenantId) {
         return webClient.get()
-                .uri(tenancyServiceUrl + "/api/tenants/{id}", tenantId)
+                .uri(tenancyServiceUrl + "/api/tenants/commons/{id}", tenantId)
                 .retrieve()
                 .bodyToMono(TenantDto.class)
                 .timeout(Duration.ofSeconds(5))
                 .doOnError(error -> log.warn("Error fetching tenant by ID '{}': {}", 
                     tenantId, error.getMessage()))
-                .onErrorReturn(new TenantDto(null, null, null, null, null));
+                .onErrorReturn(new TenantDto(null, null, null, null, null, null, null, null));
     }
     
     /**
      * Verifica si un tenant existe y está activo.
      */
     public Mono<Boolean> isTenantActive(UUID tenantId) {
-        return getTenantById(tenantId)
-                .map(TenantDto::isActive)
-                .defaultIfEmpty(false);
+        return webClient.get()
+                .uri(tenancyServiceUrl + "/api/tenants/commons/{id}/active", tenantId)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .timeout(Duration.ofSeconds(5))
+                .doOnError(error -> log.warn("Error checking if tenant '{}' is active: {}", 
+                    tenantId, error.getMessage()))
+                .onErrorReturn(false);
     }
 }
